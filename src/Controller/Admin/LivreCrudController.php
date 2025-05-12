@@ -6,6 +6,7 @@ use App\Entity\Livre;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
@@ -23,7 +24,10 @@ class LivreCrudController extends AbstractCrudController
             
             TextField::new('titre'),
             TextEditorField::new('resume'),
-            TextField::new('couverture'),
+            ImageField::new('couverture')
+                ->setBasePath('uploads/livres')
+                ->setUploadDir('public/uploads/livres')
+                ->setRequired(true),
             AssociationField::new('auteur')
                 ->setRequired(true)
                 ->setFormTypeOption('choice_label', 'nom'),
